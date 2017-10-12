@@ -1,1 +1,1 @@
-// require("!style-loader!less-loader!./styles.less");
+// require("!style-loader!less-loader!./assets/styles.less");

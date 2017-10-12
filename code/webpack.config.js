@@ -1,32 +1,31 @@
 const path = require('path');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+const extractCSS = new ExtractTextPlugin('styles_1.css');
+const extractLESS = new ExtractTextPlugin('styles_2.css');
+
 module.exports = {
-  entry: './src/app.js',
+  entry: {
+    main: './src/app.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist/assets/'),
     filename: 'bundle.min.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loader: 'style!css'
+        use: extractCSS.extract([ 'css-loader', 'postcss-loader' ])
       },
       {
-        test: /\.less$/,
-        use: [
-          {
-            loader: "style-loader" // creates style nodes from JS strings
-          },
-          {
-            loader: "css-loader" // translates CSS into CommonJS
-          },
-          {
-            loader: "less-loader" // compiles Less to CSS
-          }
-        ]
-      }
+        test: /\.less$/i,
+        use: extractLESS.extract([ 'css-loader', 'less-loader' ])
+      },
     ]
-  }
+  },
+  plugins: [
+    extractCSS,
+    extractLESS
+  ]
 };
