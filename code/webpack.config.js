@@ -65,7 +65,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.min.css'),
     // extractCSS,
     // extractLESS
   ]
