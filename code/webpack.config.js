@@ -22,7 +22,7 @@ module.exports = {
         ])
       },
       {
-        test: /\.less$/i,
+        test: /^(?!.*base\.less).*\.less$/i,
         use: ExtractTextPlugin.extract([ 'css-loader', 'less-loader' ])
       },
       {
